@@ -54,7 +54,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         
         if let tweet = tweets?[indexPath.row] {
-            //cell.tweetTextLabel.text = tweet?.text
             cell.tweet = tweet
         }
         return cell
@@ -68,15 +67,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         var cell = sender as!  UITableViewCell
-        
         let indexPath = tableView.indexPathForCell(cell)!
-        
         let tweet = tweets?[indexPath.row]
         let tweetDetailViewController = segue.destinationViewController as! TweetDetailViewController
         tweetDetailViewController.tweet = tweet
-        
     }
 
 }
