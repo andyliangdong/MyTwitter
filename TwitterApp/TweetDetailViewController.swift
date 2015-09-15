@@ -18,7 +18,8 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var favoriteCntLabel: UILabel!
     @IBOutlet weak var retweetedImageView: UIImageView!
     @IBOutlet weak var retweetedNameLabel: UILabel!
-    
+    @IBOutlet weak var createdAtLabel: UILabel!
+   
     var user : User! {
         didSet {
             nameLabel.text = user?.name
@@ -27,9 +28,6 @@ class TweetDetailViewController: UIViewController {
             }
             if let profileImageUrl = user?.profileImageUrl {
                 profileImageView.setImageWithURL(profileImageUrl)
-            }
-            if let createdAt = tweet?.createdAt {
-                //tweetAgeLabel.text = elapsedTime(createdAt)
             }
         }
     }
@@ -41,8 +39,8 @@ class TweetDetailViewController: UIViewController {
 
         if (tweet?.retweet == nil) {
             tweetTextLabel.text = tweet?.text
-            retweetCntLabel.text = "\(tweet?.retweetCnt!)"
-            favoriteCntLabel.text = "\(tweet?.favoriteCnt!)"
+            retweetCntLabel.text = "\(tweet!.retweetCnt!)"
+            favoriteCntLabel.text = "\(tweet!.favoriteCnt!)"
             user = tweet?.user
             retweetedNameLabel.hidden = true
             retweetedImageView.hidden = true
@@ -61,6 +59,17 @@ class TweetDetailViewController: UIViewController {
                 retweetedNameLabel.text = "\(retweetUsername) Retweeted"
             }
         }
+        
+        if let createdAt = tweet?.createdAt {
+            var formatter = NSDateFormatter()
+            formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+            formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+            createdAtLabel.text =  formatter.stringFromDate(createdAt)
+        }
+
+        
+        profileImageView.layer.cornerRadius = 4
+        profileImageView.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {

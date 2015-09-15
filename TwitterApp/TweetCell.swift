@@ -30,10 +30,7 @@ class TweetCell: UITableViewCell {
             }
             if let profileImageUrl = user?.profileImageUrl {
                 profileImageView.setImageWithURL(profileImageUrl)
-            }
-            if let createdAt = tweet.createdAt {
-                tweetAgeLabel.text = elapsedTime(createdAt)
-            }
+            }    
         }
     }
     
@@ -60,6 +57,9 @@ class TweetCell: UITableViewCell {
                     retweetedImageView.hidden = false
                     retweetedNameLabel.text = "\(retweetUsername) Retweeted"
                 }
+            }
+            if let createdAt = tweet.createdAt {
+                tweetAgeLabel.text = elapsedTime(createdAt)
             }
         }
     }
