@@ -13,7 +13,7 @@ Required
 [4] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp. In other words, design the custom cell with the proper Auto Layout settings. You will also need to augment the model classes.
 [ ] User can pull to refresh
 [ ] User can compose a new tweet by tapping on a compose button.
-[ ] User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
+[2] User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
 [ ] User can retweet, favorite, and reply to the tweet directly from the timeline feed.
 Optional
 
@@ -24,4 +24,8 @@ Optional
 [ ] Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
 [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 
-Walkthrough
+after adding the Navigation Controller that there is some bug that
+the sign in cannot see the correct user profile.
+
+Walkthrough (twitterApp_v1.gif)
+
