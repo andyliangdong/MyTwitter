@@ -27,5 +27,5 @@ Optional
 after adding the Navigation Controller that there is some bug that
 the sign in cannot see the correct user profile.
 
-Walkthrough (twitterApp_v1.gif)
+!Walkthrough (twitterApp_v1.gif)
 
