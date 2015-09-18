@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class Tweet: NSObject {
     var user: User?
     var text: String?
@@ -18,14 +19,19 @@ class Tweet: NSObject {
     var favoriteCnt: Int?
     var urls: [NSURL]?
     var retweet : Tweet?
+    var isFavorited: Bool?
+    var isRetweeted: Bool?
     
     
     init(dictionary: NSDictionary) {
         user = User(dictionary: dictionary["user"] as! NSDictionary)
         text = dictionary["text"] as? String
         
+        isFavorited = dictionary["favorited"] as? Bool
+        isRetweeted = dictionary["retweeted"] as? Bool
         retweetCnt = dictionary["retweet_count"] as? Int
         favoriteCnt = dictionary["favorite_count"] as? Int
+        
         createdAtString = dictionary["created_at"] as? String
         
         var formatter = NSDateFormatter()
