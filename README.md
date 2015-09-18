@@ -26,6 +26,11 @@ Optional
 
 after adding the Navigation Controller that there is some bug that
 the sign in cannot see the correct user profile.
+I spend a lot of time and find the warning occurs at
+
+self.performSegueWithIdentifier("loginSegue", sender: self) in ViewController.swift
+
+2015-09-15 23:26:39.130 TwitterApp[15133:721522] Warning: Attempt to present <UINavigationController: 0x7ffe195be500> on <TwitterApp.ViewController: 0x7ffe1b812ad0> whose view is not in the window hierarchy!
 
 ![Walkthrough](twitterApp_v1.gif)
 
