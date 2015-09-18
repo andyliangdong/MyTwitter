@@ -19,6 +19,9 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var retweetedImageView: UIImageView!
     @IBOutlet weak var retweetedNameLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
    
     var user : User! {
         didSet {
@@ -66,6 +69,19 @@ class TweetDetailViewController: UIViewController {
             formatter.timeStyle = NSDateFormatterStyle.ShortStyle
             createdAtLabel.text =  formatter.stringFromDate(createdAt)
         }
+        
+        if tweet?.isFavorited! == true {
+            self.favoriteButton.setImage(UIImage(named:"favorite_on"), forState: UIControlState.Normal)
+        } else {
+            self.favoriteButton.setImage(UIImage(named:"favorite"), forState: UIControlState.Normal)
+        }
+        
+        if tweet?.isRetweeted! == true {
+            self.retweetButton.setImage(UIImage(named:"retweet_on"), forState: UIControlState.Normal)
+        } else {
+            self.retweetButton.setImage(UIImage(named:"retweet"), forState: UIControlState.Normal)
+        }
+
 
         
         profileImageView.layer.cornerRadius = 4
