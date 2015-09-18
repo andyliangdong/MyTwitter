@@ -31,7 +31,9 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetCntLabel: UILabel!
     @IBOutlet weak var favoriteCntLabel: UILabel!
     
-    
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     lazy var formatter = NSDateFormatter()
     
@@ -75,6 +77,18 @@ class TweetCell: UITableViewCell {
             }
             if let createdAt = tweet.createdAt {
                 tweetAgeLabel.text = elapsedTime(createdAt)
+            }
+            
+            if tweet.isFavorited! == true {
+                self.favoriteButton.setImage(UIImage(named:"favorite_on"), forState: UIControlState.Normal)
+            } else {
+                self.favoriteButton.setImage(UIImage(named:"favorite"), forState: UIControlState.Normal)
+            }
+            
+            if tweet.isRetweeted! == true {
+                self.retweetButton.setImage(UIImage(named:"retweet_on"), forState: UIControlState.Normal)
+            } else {
+                self.retweetButton.setImage(UIImage(named:"retweet"), forState: UIControlState.Normal)
             }
         }
     }
