@@ -8,6 +8,15 @@
 
 import UIKit
 
+
+
+@objc protocol TweetCellDelegate {
+    optional func tweetCell(tweetCell: TweetCell, senderTweet: Tweet)
+}
+
+
+
+
 class TweetCell: UITableViewCell {
 
     
@@ -21,6 +30,12 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var textUrlImageView: UIView!
     @IBOutlet weak var retweetCntLabel: UILabel!
     @IBOutlet weak var favoriteCntLabel: UILabel!
+    
+    
+    
+    lazy var formatter = NSDateFormatter()
+    
+    weak var delegate: TweetCellDelegate?
     
     var user : User! {
         didSet {
@@ -66,7 +81,7 @@ class TweetCell: UITableViewCell {
     
     
     
-    lazy var formatter = NSDateFormatter()
+    
     
     func elapsedTime(createdAt : NSDate) -> String {
         let elapsed = Int(NSDate().timeIntervalSinceDate(createdAt))
@@ -96,8 +111,6 @@ class TweetCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

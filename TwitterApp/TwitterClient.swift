@@ -26,18 +26,23 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     }
     
     func homeTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()){
-        
-        GET("1.1/statuses/home_timeline.json", parameters:
-            params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
-                //println("home_timeline\(response)")
+        GET("1.1/statuses/home_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
             var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
-//            for tweet in tweets {
-//                println("text:\(tweet.text!), created: \(tweet.createdAt!), profileImageURL: \(tweet.user?.profileImageUrl!)")
-//            }
             completion(tweets: tweets, error: nil)
-        }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-            println("Fail to get home timeline")
-            completion(tweets: nil, error: error)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("Fail to get home timeline")
+                completion(tweets: nil, error: error)
+        })
+    }
+    
+    func favorite_create(id: Int, completion: (response: AnyObject?, error: NSError?) -> ()){
+        var params = ["id": id]
+        POST("1.1/favorites/create.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
+            println("Successfully favorited")
+            completion(response: response, error:nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("Fail to favorite")
+                completion(response: nil, error: error)
         })
     }
     

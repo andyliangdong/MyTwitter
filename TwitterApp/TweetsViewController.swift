@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate {
 
     
     var tweets : [Tweet]?
@@ -55,6 +55,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         if let tweet = tweets?[indexPath.row] {
             cell.tweet = tweet
+            cell.delegate = self
         }
         return cell
     }
@@ -73,5 +74,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let tweetDetailViewController = segue.destinationViewController as! TweetDetailViewController
         tweetDetailViewController.tweet = tweet
     }
+    
+    func tweetCell(tweetCell: TweetCell, senderTweet: Tweet) {
+        println("tweetCell delegate is called")
+    }
+
 
 }
