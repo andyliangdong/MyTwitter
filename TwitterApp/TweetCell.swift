@@ -94,7 +94,27 @@ class TweetCell: UITableViewCell {
     }
     
     
+    @IBAction func onFavoriteButton(sender: UIButton) {
+        if let id = tweet.id  {
+            if tweet!.isFavorited == false {
+                self.favoriteButton.setImage(UIImage(named:"favorite_on"), forState: UIControlState.Normal)
+                self.tweet!.favoriteCnt! +=  1
+                self.favoriteCntLabel.text = "\(self.tweet!.favoriteCnt!)"
+                
+                TwitterClient.sharedInstance.favorite_create(id, completion: { (response, error) -> () in
+                    if response != nil {
+                        self.tweet!.isFavorited = true
+                    } else if error != nil {
+                        println("error:\(error)")
+                        self.favoriteButton.setImage(UIImage(named:"favorite"), forState: UIControlState.Normal)
+                    }
+                })
+            }
+        }
+    }
     
+    @IBAction func onRetweetButton(sender: UIButton) {
+    }
     
     
     func elapsedTime(createdAt : NSDate) -> String {
