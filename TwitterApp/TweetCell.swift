@@ -100,13 +100,16 @@ class TweetCell: UITableViewCell {
                 self.favoriteButton.setImage(UIImage(named:"favorite_on"), forState: UIControlState.Normal)
                 self.tweet!.favoriteCnt! +=  1
                 self.favoriteCntLabel.text = "\(self.tweet!.favoriteCnt!)"
-                
+                self.tweet!.isFavorited = true
                 TwitterClient.sharedInstance.favorite_create(id, completion: { (response, error) -> () in
                     if response != nil {
-                        self.tweet!.isFavorited = true
+                        
                     } else if error != nil {
                         print("error:\(error)")
                         self.favoriteButton.setImage(UIImage(named:"favorite"), forState: UIControlState.Normal)
+                        self.tweet!.favoriteCnt! -=  1
+                        self.favoriteCntLabel.text = "\(self.tweet!.favoriteCnt!)"
+                        self.tweet!.isFavorited = false
                     }
                 })
             }
@@ -114,6 +117,25 @@ class TweetCell: UITableViewCell {
     }
     
     @IBAction func onRetweetButton(sender: UIButton) {
+        if let id = tweet.id {
+            if tweet!.isRetweeted == false {
+                self.retweetButton.setImage(UIImage(named: "retweet_on"), forState: UIControlState.Normal)
+                self.tweet!.retweetCnt! += 1
+                self.retweetCntLabel.text = "\(self.tweet!.retweetCnt!)"
+                self.tweet!.isRetweeted = true
+                TwitterClient.sharedInstance.retweet_id(id, completion: { (response, error) -> () in
+                    if response != nil {
+                        
+                    } else if error != nil {
+                        print("error:\(error)")
+                        self.retweetButton.setImage(UIImage(named:"retweet"), forState: UIControlState.Normal)
+                        self.tweet!.retweetCnt! -= 1
+                        self.retweetCntLabel.text = "\(self.tweet!.retweetCnt!)"
+                        self.tweet!.isRetweeted = false
+                    }
+                })
+            }
+        }
     }
     
     
