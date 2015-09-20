@@ -13,6 +13,7 @@ class ComposeViewController: UIViewController {
     @IBOutlet weak var screennameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var tweetTextField: UITextView!
     
     
     var user: User? {
@@ -38,8 +39,22 @@ class ComposeViewController: UIViewController {
     
   
     @IBAction func onTweetButtonAction(sender: UIBarButtonItem) {
+        var tweetText = tweetTextField.text
+        if tweetText.characters.count > 140 {
+            tweetText = tweetText.substringToIndex(tweetText.startIndex.advancedBy(140))
+        }
+        let params = ["status": tweetText]
+        TwitterClient.sharedInstance.create_tweet(params) { (response, error) -> () in
+            if response != nil {
+                print ("tweet created")
+                self.dismissViewControllerAnimated(true, completion:nil)
+            }
+        }
     }
    
+    @IBAction func onCancelButton(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

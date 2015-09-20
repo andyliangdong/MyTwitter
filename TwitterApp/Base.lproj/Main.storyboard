@@ -295,7 +295,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HSG-D7-O3K">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="j2c-sb-X3b"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="j2c-sb-X3b">
+                            <connections>
+                                <action selector="onCancelButton:" destination="CIr-YC-TW6" id="mmQ-4J-CpR"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Tweet" id="dfr-7i-TwC">
                             <connections>
                                 <action selector="onTweetButtonAction:" destination="CIr-YC-TW6" id="UPN-y2-Cek"/>
@@ -305,6 +309,7 @@
                     <connections>
                         <outlet property="profileImageView" destination="Mur-zn-uvK" id="fWv-XW-Pny"/>
                         <outlet property="screennameLabel" destination="bq1-0R-itN" id="fFr-Ke-1Rq"/>
+                        <outlet property="tweetTextField" destination="6A3-Cf-Poy" id="Sht-aK-g8V"/>
                         <outlet property="usernameLabel" destination="ZZq-14-3DG" id="U30-dQ-Zf5"/>
                     </connections>
                 </viewController>
