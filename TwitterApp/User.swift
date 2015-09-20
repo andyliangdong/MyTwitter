@@ -30,7 +30,7 @@ class User: NSObject {
 //            let range = Range<String.Index>(start: str.startIndex, end: str.startIndex.advancedBy(4))
 //            str.replaceRange(range,  with: "https")
             profileImageUrl = NSURL(string: profileImageUrlString)
-            print(profileImageUrlString)
+            //print(profileImageUrl)
         }
         
         tagline = dictionary["description"] as? String

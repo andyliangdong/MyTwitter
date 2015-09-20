@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     @IBAction func onLogin(sender: AnyObject) {
         TwitterClient.sharedInstance.loginWithCompletion() {
