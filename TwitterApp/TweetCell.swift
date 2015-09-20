@@ -105,7 +105,7 @@ class TweetCell: UITableViewCell {
                     if response != nil {
                         self.tweet!.isFavorited = true
                     } else if error != nil {
-                        println("error:\(error)")
+                        print("error:\(error)")
                         self.favoriteButton.setImage(UIImage(named:"favorite"), forState: UIControlState.Normal)
                     }
                 })

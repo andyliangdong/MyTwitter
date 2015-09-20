@@ -64,7 +64,7 @@ class TweetDetailViewController: UIViewController {
         }
         
         if let createdAt = tweet?.createdAt {
-            var formatter = NSDateFormatter()
+            let formatter = NSDateFormatter()
             formatter.dateStyle = NSDateFormatterStyle.ShortStyle
             formatter.timeStyle = NSDateFormatterStyle.ShortStyle
             createdAtLabel.text =  formatter.stringFromDate(createdAt)
