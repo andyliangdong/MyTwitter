@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if User.currentUser != nil {
             // go to the logged in screen
-            println("Current User Detected \(User.currentUser?.name)")
+            print("Current User Detected \(User.currentUser?.name)")
             //var vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as! UIViewController
-            var vc = storyboard.instantiateViewControllerWithIdentifier("MainNavController") as! UINavigationController
+            let vc = storyboard.instantiateViewControllerWithIdentifier("MainNavController") as! UINavigationController
             window?.rootViewController = vc
             window?.makeKeyAndVisible()
         }
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func userDidLogout() {
-        var vc = storyboard.instantiateInitialViewController() as! UIViewController
+        let vc = storyboard.instantiateInitialViewController() as UIViewController?
         window?.rootViewController = vc
     }
 
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url:NSURL,
-        sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        sourceApplication: String?, annotation: AnyObject) -> Bool {
         TwitterClient.sharedInstance.openURL(url)
         return true
     }

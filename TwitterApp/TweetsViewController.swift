@@ -51,7 +51,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         
         if let tweet = tweets?[indexPath.row] {
             cell.tweet = tweet
@@ -61,14 +61,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
+        //var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         tableView.deselectRowAtIndexPath( indexPath, animated: false)
     }
 
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var cell = sender as!  UITableViewCell
+        let cell = sender as!  UITableViewCell
         let indexPath = tableView.indexPathForCell(cell)!
         let tweet = tweets?[indexPath.row]
         let tweetDetailViewController = segue.destinationViewController as! TweetDetailViewController
@@ -76,7 +76,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tweetCell(tweetCell: TweetCell, senderTweet: Tweet) {
-        println("tweetCell delegate is called")
+        print("tweetCell delegate is called")
     }
 
 

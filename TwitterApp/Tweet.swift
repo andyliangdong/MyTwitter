@@ -35,19 +35,17 @@ class Tweet: NSObject {
         
         createdAtString = dictionary["created_at"] as? String
         
-        var formatter = NSDateFormatter()
+        let formatter = NSDateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         createdAt = formatter.dateFromString(createdAtString!)
         
-        if let _urls = dictionary["entities"]?["urls"] as? [String] {
-            urls = [NSURL]()
-            for _url in _urls {
-                if let _nsurl = NSURL(fileURLWithPath: _url) {
-                    println(_url)
-                    urls?.append(_nsurl)
-                }
-            }
-        }
+//        if let _urls = dictionary["entities"]?["urls"] as? [String] {
+//            urls = [NSURL]()
+//            for _url in _urls {
+//                let _nsurl = NSURL(fileURLWithPath: _url)
+//                urls?.append(_nsurl)
+//            }
+//        }
         
         if let retweetStr = dictionary["retweeted_status"] as? NSDictionary {
             retweet = Tweet(dictionary: retweetStr)

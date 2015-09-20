@@ -27,21 +27,21 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     
     func homeTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()){
         GET("1.1/statuses/home_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
-            var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
             }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                println("Fail to get home timeline")
+                print("Fail to get home timeline")
                 completion(tweets: nil, error: error)
         })
     }
     
     func favorite_create(id: Int, completion: (response: AnyObject?, error: NSError?) -> ()){
-        var params = ["id": id]
+        let params = ["id": id]
         POST("1.1/favorites/create.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
-            println("Successfully favorited")
+            print("Successfully favorited")
             completion(response: response, error:nil)
             }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                println("Fail to favorite")
+                print("Fail to favorite")
                 completion(response: nil, error: error)
         })
     }
@@ -58,11 +58,11 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             method: "GET", callbackURL: callbackUrl,
             scope: nil, success: {
                 (requestToken: BDBOAuth1Credential!) -> Void in
-                println("Got the request token")
-                var authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
+                print("Got the request token")
+                let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
                 UIApplication.sharedApplication().openURL(authURL!)
             }){ (error: NSError!) -> Void in
-                println("Failed to get request token")
+                print("Failed to get request token")
                 self.loginCompletion?(user: nil, error: error)
         }
     }
@@ -70,22 +70,22 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     
     func openURL(url: NSURL) {
         fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query), success: { (accessToken:BDBOAuth1Credential!) -> Void in
-            println("Got the access token")
+            print("Got the access token")
             TwitterClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
             TwitterClient.sharedInstance.GET("1.1/account/verify_credentials.json", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
                 //println(response)
-                var user = User(dictionary: response as! NSDictionary)
+                let user = User(dictionary: response as! NSDictionary)
                 User.currentUser = user
-                println("user:\(user.name)")
+                print("user:\(user.name)")
                 self.loginCompletion?(user: user, error: nil)
             }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                println("Fail to get verified credentials")
+                print("Fail to get verified credentials")
                 self.loginCompletion?(user: nil, error: error)
             })
             
             
          }) { (error: NSError!) -> Void in
-            println("Fail to get the access token")
+            print("Fail to get the access token")
             self.loginCompletion?(user: nil, error: error)
         }
 
