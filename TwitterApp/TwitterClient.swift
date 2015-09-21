@@ -41,7 +41,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             print("Successfully favorited")
             completion(response: response, error:nil)
             }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                print("Fail to favorite")
+                print("Fail to favorite, error:\(error)")
                 completion(response: nil, error: error)
         })
     }

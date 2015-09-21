@@ -23,5 +23,16 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "loginSegue" {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let hamburgerViewController = segue.destinationViewController as! HamburgerViewController
+            let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+            menuViewController.hamburgerViewController = hamburgerViewController
+            hamburgerViewController.menuViewController = menuViewController
+        }
+    }
+
 }
 
