@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -20,21 +21,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
         
+        
         if User.currentUser != nil {
             // go to the logged in screen
             print("Current User Detected \(User.currentUser?.name)")
-            //var vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as! UIViewController
-            let vc = storyboard.instantiateViewControllerWithIdentifier("MainNavController") as! UINavigationController
+//            let vc = storyboard.instantiateViewControllerWithIdentifier("MainNavController") as! UINavigationController
+//            window?.rootViewController = vc
+//            window?.makeKeyAndVisible()
+            
+            //let hamburgerViewController = window!.rootViewController as! HamburgerViewController
+            let hamburgerViewController = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
+            let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+            menuViewController.hamburgerViewController = hamburgerViewController
+            hamburgerViewController.menuViewController = menuViewController
+            
+            window?.rootViewController = hamburgerViewController
+            window?.makeKeyAndVisible()
+        } else {
+            let vc = storyboard.instantiateInitialViewController() as UIViewController?
             window?.rootViewController = vc
             window?.makeKeyAndVisible()
         }
+
         
+        
+//        let vc = storyboard.instantiateViewControllerWithIdentifier("HamburgerController") as! HamburgerViewController
+//        
+//        //vc.menuViewController = menuViewController
+//        window?.rootViewController = vc
+        
+        
+        //let hamburgerNavCtrl = storyboard.instantiateViewControllerWithIdentifier("HamburgerNavController") as! UINavigationController
+        //let hamburgerViewController = hamburgerNavCtrl.topViewController as! HamburgerViewController
+        
+        
+//        let hamburgerViewController = window!.rootViewController as! HamburgerViewController
+//        let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+//        menuViewController.hamburgerViewController = hamburgerViewController
+//        hamburgerViewController.menuViewController = menuViewController
+        
+        //window?.rootViewController = hamburgerNavCtrl
+        //window?.makeKeyAndVisible()
         return true
     }
     
     func userDidLogout() {
         let vc = storyboard.instantiateInitialViewController() as UIViewController?
         window?.rootViewController = vc
+        window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(application: UIApplication) { 
