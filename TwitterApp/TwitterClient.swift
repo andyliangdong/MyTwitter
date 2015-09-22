@@ -35,6 +35,16 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         })
     }
     
+    func showUserProfileWithParams(params: NSDictionary?, completion: (userProfile: UserProfile?, error: NSError?) -> () ){
+        GET("1.1/users/show.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
+            let userProfile = UserProfile(dictionary: response as! NSDictionary)
+            completion(userProfile: userProfile, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                print("Fail to get User Profile error \(error)")
+                completion(userProfile: nil, error: error)
+        })
+    }
+    
     
     func mentionsTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         GET("1.1/statuses/mentions_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
@@ -80,7 +90,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 completion(response: nil, error: error)
         })
     }
- 
+    
     
     
     func loginWithCompletion(completion: (user:User?, error: NSError?) -> ()) {
