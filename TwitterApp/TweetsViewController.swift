@@ -10,7 +10,6 @@ import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate {
 
-    
     var tweets : [Tweet]?
     
     @IBOutlet weak var tableView: UITableView!
@@ -42,11 +41,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let tweetsData = tweets {
-            return tweetsData.count
-        } else {
-            return 0
-        }
+        return tweets?.count ?? 0
     }
     
     

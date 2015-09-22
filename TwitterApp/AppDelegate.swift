@@ -25,11 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser != nil {
             // go to the logged in screen
             print("Current User Detected \(User.currentUser?.name)")
-//            let vc = storyboard.instantiateViewControllerWithIdentifier("MainNavController") as! UINavigationController
-//            window?.rootViewController = vc
-//            window?.makeKeyAndVisible()
-            
-            //let hamburgerViewController = window!.rootViewController as! HamburgerViewController
+
             let hamburgerViewController = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
             let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
             menuViewController.hamburgerViewController = hamburgerViewController
