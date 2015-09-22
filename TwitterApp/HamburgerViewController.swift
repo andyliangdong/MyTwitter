@@ -34,6 +34,7 @@ class HamburgerViewController: UIViewController {
             }
             
             contentViewController.willMoveToParentViewController(self)
+            contentViewController.view.frame = view.frame
             contentView.addSubview(contentViewController.view)
             contentViewController.didMoveToParentViewController(self)
             
@@ -47,8 +48,6 @@ class HamburgerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

@@ -18,7 +18,7 @@ class Tweet: NSObject {
     var urlsInText: [NSURL]?
     var retweetCnt: Int?
     var favoriteCnt: Int?
-    var urls: [NSURL]?
+    //var urls: [NSURL]?
     var retweet : Tweet?
     var isFavorited: Bool?
     var isRetweeted: Bool?
@@ -39,13 +39,13 @@ class Tweet: NSObject {
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         createdAt = formatter.dateFromString(createdAtString!)
         
-        if let _urls = dictionary["entities"]?["urls"] as? [String] {
-            urls = [NSURL]()
-            for _url in _urls {
-                let _nsurl = NSURL(fileURLWithPath: _url)
-                urls?.append(_nsurl)
-            }
-        }
+//        if let _urls = dictionary["entities"]?["urls"] as? [String] {
+//            urls = [NSURL]()
+//            for _url in _urls {
+//                let _nsurl = NSURL(fileURLWithPath: _url)
+//                urls?.append(_nsurl)
+//            }
+//        }
         
         if let retweetStr = dictionary["retweeted_status"] as? NSDictionary {
             retweet = Tweet(dictionary: retweetStr)

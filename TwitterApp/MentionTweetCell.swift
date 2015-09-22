@@ -1,25 +1,15 @@
 //
-//  TweetCell.swift
+//  MentionTweetCell.swift
 //  TwitterApp
 //
-//  Created by Andy (Liang) Dong on 9/13/15.
-//  Copyright (c) 2015 codepath. All rights reserved.
+//  Created by Andy (Liang) Dong on 9/21/15.
+//  Copyright © 2015 codepath. All rights reserved.
 //
 
 import UIKit
 
+class MentionTweetCell: UITableViewCell {
 
-
-@objc protocol TweetCellDelegate {
-    optional func tweetCell(tweetCell: TweetCell, senderTweet: Tweet)
-}
-
-
-
-
-class TweetCell: UITableViewCell {
-
-    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
@@ -47,13 +37,13 @@ class TweetCell: UITableViewCell {
             }
             if let profileImageUrl = user?.profileImageUrl {
                 profileImageView.setImageWithURL(profileImageUrl)
-            }    
+            }
         }
     }
     
     var tweet : Tweet! {
         didSet {
-
+            
             if (tweet.retweet == nil) {
                 tweetTextLabel.text = tweet.text
                 retweetCntLabel.text = "\(tweet.retweetCnt!)"
@@ -77,7 +67,7 @@ class TweetCell: UITableViewCell {
                 }
             }
             if let createdAt = tweet.createdAt {
-               tweetAgeLabel.text = elapsedTime(createdAt)
+                tweetAgeLabel.text = elapsedTime(createdAt)
             }
             
             if tweet.isFavorited! == true {
@@ -165,9 +155,10 @@ class TweetCell: UITableViewCell {
         profileImageView.layer.cornerRadius = 3
         profileImageView.clipsToBounds = true
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
 
 }
