@@ -29,7 +29,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         tweetsViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsNavController")
-        profileViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController")
+        profileViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileNavController")
         mentionsViewController = storyboard.instantiateViewControllerWithIdentifier("MentionsNavController")
         
         viewControllers.append(tweetsViewController!)
