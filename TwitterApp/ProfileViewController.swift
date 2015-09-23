@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     var userProfile : UserProfile?
+    var tweets : [Tweet]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let params = ["user_id":user.id!, "screen_name": user.screenname!]
         TwitterClient.sharedInstance.showUserProfileWithParams(params) { (userProfile, error) -> () in
             self.userProfile = userProfile
-           
+            self.tableView.reloadData()
+        }
+        
+        TwitterClient.sharedInstance.userTimelineWithParams(params) { (tweets, error) -> () in
+            self.tweets = tweets
             self.tableView.reloadData()
         }
         
@@ -36,10 +41,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return tweets?.count ?? 0
     }
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 180
+    }
     
+   
     func tableView(tableView: UITableView,  viewForHeaderInSection section: Int) -> UIView? {
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("ProfileHeaderCell") as! ProfileHeaderCell
         if let profile = userProfile {
@@ -48,26 +57,27 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         return headerCell
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 180
-    }
+
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ProfileTweetCell", forIndexPath: indexPath) as! ProfileTweetCell
-       
+        if let tweet = tweets?[indexPath.row] {
+            cell.tweet = tweet
+        }
         return cell
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "viewProfileTweetDetail" {
+            let cell = sender as!  UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)!
+            let tweet = tweets?[indexPath.row]
+            let tweetDetailViewController = segue.destinationViewController as! TweetDetailViewController
+            tweetDetailViewController.tweet = tweet
+        }
     }
-    */
+
 
 }

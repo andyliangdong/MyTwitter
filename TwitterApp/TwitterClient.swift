@@ -35,6 +35,26 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         })
     }
     
+    func userTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()){
+        GET("1.1/statuses/user_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
+            let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                print("Fail to get user timeline error \(error)")
+                completion(tweets: nil, error: error)
+        })
+    }
+    
+    func mentionsTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        GET("1.1/statuses/mentions_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
+            let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                print("Fail to get mentions timeline")
+                completion(tweets: nil, error: error)
+        })
+    }
+    
     func showUserProfileWithParams(params: NSDictionary?, completion: (userProfile: UserProfile?, error: NSError?) -> () ){
         GET("1.1/users/show.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
             let userProfile = UserProfile(dictionary: response as! NSDictionary)
@@ -42,17 +62,6 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 print("Fail to get User Profile error \(error)")
                 completion(userProfile: nil, error: error)
-        })
-    }
-    
-    
-    func mentionsTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
-        GET("1.1/statuses/mentions_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response:AnyObject!) -> Void in
-            let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
-            completion(tweets: tweets, error: nil)
-            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                print("Fail to get home timeline")
-                completion(tweets: nil, error: error)
         })
     }
     

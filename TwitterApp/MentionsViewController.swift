@@ -61,10 +61,6 @@ class MentionsViewController: UIViewController, UITableViewDataSource, UITableVi
             let tweet = tweets?[indexPath.row]
             let tweetDetailViewController = segue.destinationViewController as! TweetDetailViewController
             tweetDetailViewController.tweet = tweet
-        } else if segue.identifier == "composeTweet" {
-            let dvc = segue.destinationViewController as! UINavigationController
-            _ = dvc.topViewController as! ComposeViewController
-            
         }
     }
 
