@@ -43,7 +43,6 @@ class MentionTweetCell: UITableViewCell {
     
     var tweet : Tweet! {
         didSet {
-            
             if (tweet.retweet == nil) {
                 tweetTextLabel.text = tweet.text
                 retweetCntLabel.text = "\(tweet.retweetCnt!)"
