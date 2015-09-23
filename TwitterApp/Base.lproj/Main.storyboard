@@ -788,6 +788,12 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hx2-ah-nDL" userLabel="ProfileViewButton">
+                                                    <rect key="frame" x="9" y="24" width="40" height="39"/>
+                                                    <connections>
+                                                        <action selector="onClickProfileImageView:" destination="HrB-uq-LJ6" eventType="touchUpInside" id="Zo3-8O-FA9"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="r6M-d3-eAW" firstAttribute="leading" secondItem="F2d-us-tZm" secondAttribute="leadingMargin" constant="28" id="0nq-zy-dLf"/>
@@ -824,6 +830,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="ProfileImageViewButton" destination="Hx2-ah-nDL" id="r5e-Os-hlg"/>
                                             <outlet property="favoriteButton" destination="21g-S8-npy" id="e4Y-Qr-ekP"/>
                                             <outlet property="favoriteCntLabel" destination="7GL-0H-ibV" id="BnD-Y8-01p"/>
                                             <outlet property="nameLabel" destination="kVx-6G-Jqo" id="6yH-VQ-uxA"/>
@@ -865,6 +872,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ApP-3a-7zI" id="Q85-j4-kXT"/>
+                        <segue destination="WfQ-Z4-M0d" kind="push" identifier="viewProfileViewSegue" id="Tt8-Y4-A8s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U4u-dj-lzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1204,6 +1212,7 @@
             <objects>
                 <navigationController storyboardIdentifier="ProfileNavController" automaticallyAdjustsScrollViewInsets="NO" id="EBs-Tb-rjs" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="yV9-vJ-upR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xdJ-UF-Kdh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1242,6 +1251,7 @@
         <image name="retweet" width="19" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Tt8-Y4-A8s"/>
         <segue reference="cHl-z9-pYp"/>
     </inferredMetricsTieBreakers>
 </document>

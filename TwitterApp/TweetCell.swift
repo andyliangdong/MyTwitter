@@ -35,12 +35,17 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
     
+    @IBOutlet weak var ProfileImageViewButton: UIButton!
+    
     lazy var formatter = NSDateFormatter()
     
     weak var delegate: TweetCellDelegate?
     
     var user : User! {
         didSet {
+            if let user_id = user?.id {
+                ProfileImageViewButton.tag = user_id
+            }
             nameLabel.text = user?.name
             if let screenname = user?.screenname {
                 screenNameLabel.text = "@\(screenname)"
