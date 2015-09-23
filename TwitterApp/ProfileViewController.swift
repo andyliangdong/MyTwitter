@@ -12,13 +12,17 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     @IBOutlet weak var tableView: UITableView!
     
+    var user_id : Int?
     var userProfile : UserProfile?
     var tweets : [Tweet]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let user = User.currentUser!
-        let params = ["user_id":user.id!, "screen_name": user.screenname!]
+        var params = ["user_id":user.id!]
+        if user_id != nil {
+            params["user_id"] = user_id
+        }
         TwitterClient.sharedInstance.showUserProfileWithParams(params) { (userProfile, error) -> () in
             self.userProfile = userProfile
             self.tableView.reloadData()

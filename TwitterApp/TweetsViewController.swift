@@ -72,9 +72,20 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         } else if segue.identifier == "composeTweet" {
             let dvc = segue.destinationViewController as! UINavigationController
             _ = dvc.topViewController as! ComposeViewController
-            
+        } else if segue.identifier == "viewProfileViewSegue" {
+            if let pvc = segue.destinationViewController as? ProfileViewController {
+                if let button = sender as? UIButton {
+                    pvc.user_id = button.tag
+                    print(button.tag)
+                }
+            }
         }
     }
+    
+    @IBAction func onClickProfileImageView(sender: UIButton) {
+        performSegueWithIdentifier("viewProfileViewSegue", sender: sender)
+    }
+    
     
     func tweetCell(tweetCell: TweetCell, senderTweet: Tweet) {
         print("tweetCell delegate is called")
