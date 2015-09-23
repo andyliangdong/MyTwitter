@@ -1,5 +1,5 @@
 # TwitterRedo
-Time spent: <15>
+Time spent: <18>
 
 Features
 Required
@@ -12,12 +12,12 @@ Required
 [Y] Contains the user header view
 [Y] Contains a section with the users basic stats: # tweets, # following, # followers
 [Y] Home Timeline
-[ ] Tapping on a user image should bring up that user's profile page
-Not done the tweets in the Profile page yet.
-Will add Gif tmr
+[Y] Tapping on a user image should bring up that user's profile page
+
+
 Optional
 
-[ ] Profile Page
+[Y] Profile Page
 [ ] Optional: Implement the paging view for the user description.
 [ ] Optional: As the paging view moves, increase the opacity of the background screen. See the actual Twitter app for this effect
 [ ] Optional: Pulling down the profile page should blur and resize the header image.
@@ -28,7 +28,7 @@ Optional
 [ ] Swipe to delete an account
 
 
-
+![Walkthrough](twitterApp_v4.gif)
 
 
 
